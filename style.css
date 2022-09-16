@@ -1,0 +1,185 @@
+:root {
+    --black: #272527;
+    --orange: #FFB82A;
+    --white: #2dbe37;
+    --pink: #FB6DBD;
+    --green: #25C73A;
+    --red: #FF4B46;
+    --bg-dracula: #282a36;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+    /* remove scrolling */
+}
+
+#tabs .tab-links *, #tabs .tab-links button {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+/* tabs */
+#tabs {
+    position: relative;
+    z-index: 1;
+}
+
+.tab-links {
+    background-color: var(--black);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+}
+
+.tab-links>div:nth-child(1) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.tab-links h1 {
+    display: inline-flex;
+    margin: 0 0 0 14px;
+    font-size: 12px;
+    padding: 0;
+    line-height: 0px;
+}
+
+.tab-links button, #enable-preview {
+    color: var(--white);
+    border: none;
+    background: transparent;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 1.2px;
+    padding: 12px;
+    outline: none;
+    position: relative;
+}
+
+.tab-links button::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    content: "";
+    height: 2px;
+    width: 0%;
+    background-color: var(--orange);
+    transition: .4s;
+}
+
+.tab-links button:hover::after, .tab-links button.active::after {
+    width: 100%;
+    font-weight: bold;
+}
+
+.tab-contents {
+    margin-top: 35px;
+    /* give space from tabs links */
+}
+
+/* code editor */
+#container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    background-color: var(--bg-dracula);
+}
+
+#code {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+    z-index: 1;
+}
+
+.CodeMirror {
+    width: 100%;
+    height: calc(100vh - 35px);
+    /* remove height of tabs */
+}
+
+.CodeMirror-scroll {
+    padding-top: 8;
+}
+
+/* draggable.js & preview */
+
+#preview {
+    position: absolute;
+    right: 2%;
+    top: 40px;
+    z-index: 10;
+    width: min(30%, 600px);
+    height: min(30vw, 400px);
+    background: black;
+    border-radius: 4px 4px 0 0;
+    box-shadow: 0px 2px 8px -4px rgba(0, 0, 0, 0.3);
+    overflow: inherit;
+    resize: both;
+}
+
+#preview header {
+    background-color: rgb(9, 11, 7);
+    border-radius: 4px 4px 0 0;
+    width: 100%;
+    height: 16px;
+    cursor: move;
+    display: flex;
+    align-items: center;
+    padding-left: 4px;
+}
+
+#preview header span {
+    width: 8px;
+    height: 8px;
+    background-color: rgb(250, 250, 250);
+    border-radius: 50%;
+    display: block;
+    overflow: hidden;
+    text-indent: -9999px;
+    cursor: default;
+    margin-right: 4px;
+}
+
+#preview header:hover span:nth-of-type(1) {
+    background-color: var(--red);
+}
+
+#preview header:hover span:nth-of-type(2) {
+    background-color: var(--orange);
+}
+
+#preview header:hover span:nth-of-type(3) {
+    background-color: var(--green);
+}
+
+#enable-preview {
+    display: none;
+    border: 1px solid var(--orange);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+iframe {
+    width: 100%;
+    height: calc(100% - 16px);
+    position: relative;
+}
